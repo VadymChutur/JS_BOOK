@@ -38,9 +38,11 @@ for (let i = 0; i < word.length; i += 1) {
   answerArray[i] = '_';
 }
 let remainingLetters = word.length;
+let numberOfAttemps = word.length * 2;
+console.log(numberOfAttemps);
 console.log(word);
 console.log(answerArray);
-while (remainingLetters > 0) {
+while (remainingLetters > 0 && numberOfAttemps > 0) {
   alert(answerArray.join(''));
   let guess = prompt('Guess a letter, or click Cansel to stop plaing.');
 
@@ -50,13 +52,24 @@ while (remainingLetters > 0) {
   } else if (guess.length !== 1) {
     alert('PLease enter a single letter.');
   } else {
+    guess = guess.toLowerCase();
+    numberOfAttemps -= 1;
+    console.log(numberOfAttemps);
     for (let j = 0; j < word.length; j += 1) {
-      if (word[j] === guess.toLowerCase()) {
-        answerArray[j] = guess.toLowerCase();
+      if (word[j] === guess && answerArray[j] === '_') {
+        answerArray[j] = guess;
         remainingLetters -= 1;
+        // alert(
+        //   'This letter is not in this word. Minus 1 attempt. There are still attempts'
+        // );
       }
     }
   }
 }
 alert(answerArray.join(' '));
-alert(`Good job! the answer was ${word}`);
+if (numberOfAttemps > 0) {
+  console.log(guess);
+  alert(`Good job! the answer was ${word}`);
+} else {
+  alert(`Too bad! The answer was ${word}`);
+}
