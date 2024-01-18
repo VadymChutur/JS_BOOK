@@ -68,7 +68,6 @@ while (remainingLetters > 0 && numberOfAttemps > 0) {
 }
 alert(answerArray.join(' '));
 if (numberOfAttemps > 0) {
-  console.log(guess);
   alert(`Good job! the answer was ${word}`);
 } else {
   alert(`Too bad! The answer was ${word}`);
