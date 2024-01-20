@@ -116,14 +116,16 @@ const getGuess = function () {
 const updateGameState = function (guess, word, answerArray) {
   guess = guess.toLowerCase();
   // console.log(numberOfAttemps);
+  let number = 0;
   for (let j = 0; j < word.length; j += 1) {
     if (word[j] === guess && answerArray[j] === '_') {
       answerArray[j] = guess;
       console.log(answerArray);
+      number += 1;
     }
   }
 
-  return;
+  return number;
 };
 const showAnswerAndCongratilatePlayer = function (answerArray) {
   alert(answerArray.join(' '));
@@ -138,7 +140,7 @@ const showAnswerAndCongratilatePlayer = function (answerArray) {
 // console.log(setupAnswerArray(pickWord(words)));
 const word = pickWord(words);
 const answerArray = setupAnswerArray(word);
-const remainingLetters = word.length;
+let remainingLetters = word.length;
 
 while (remainingLetters > 0) {
   showPlayerProgress(answerArray);
