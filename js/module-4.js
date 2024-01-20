@@ -107,7 +107,7 @@ const setupAnswerArray = function (word) {
   return answerArray;
 };
 const showPlayerProgress = function (answerArray) {
-  return alert(answerArray);
+  return alert(answerArray.join(' '));
 };
 const getGuess = function () {
   let guess = prompt('Guess a letter, or click Cansel to stop plaing.');
