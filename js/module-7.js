@@ -59,5 +59,6 @@ $('#map').click(function (event) {
   }
   if (clikcs > 150) {
     alert('GAME OWER');
+    return;
   }
 });
