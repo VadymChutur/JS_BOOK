@@ -78,7 +78,7 @@ tesla.moveRight(10);
 // console.log(nissan.moveRight());
 // console.log(nissan.moveRight());
 setInterval(function () {
-  if (tesla.x < 2000) {
+  if (tesla.x < 1500) {
     tesla.moveRight(Math.floor(Math.random() * 10));
   } else {
     tesla.x = -50;
@@ -86,7 +86,7 @@ setInterval(function () {
 }, 30);
 
 setInterval(function () {
-  if (nissan.x < 2000) {
+  if (nissan.x < 1500) {
     nissan.moveRight(Math.floor(Math.random() * 10));
   } else {
     nissan.x = -50;
