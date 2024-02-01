@@ -39,3 +39,33 @@ ctx.lineTo(260, 60);
 ctx.moveTo(260, 10);
 ctx.lineTo(210, 60);
 ctx.stroke();
+
+ctx.strokeStyle = '#008000';
+ctx.lineWidth = 4;
+ctx.strokeRect(210, 200, 20, 20);
+ctx.strokeStyle = '#008000';
+ctx.lineWidth = 4;
+ctx.beginPath();
+ctx.moveTo(220, 220);
+ctx.lineTo(220, 260);
+ctx.moveTo(220, 240);
+ctx.lineTo(200, 230);
+ctx.moveTo(220, 240);
+ctx.lineTo(240, 230);
+ctx.moveTo(220, 260);
+ctx.lineTo(200, 300);
+ctx.moveTo(220, 260);
+ctx.lineTo(240, 300);
+
+ctx.stroke();
+
+ctx.fillStyle = 'SkyBlue';
+ctx.beginPath();
+ctx.moveTo(250, 220);
+ctx.lineTo(250, 180);
+ctx.lineTo(280, 150);
+ctx.lineTo(310, 180);
+ctx.lineTo(310, 220);
+ctx.lineTo(250, 220);
+
+ctx.fill();
