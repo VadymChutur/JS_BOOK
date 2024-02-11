@@ -188,3 +188,11 @@ const drawPoints = function (points, strokeStyle = 'black') {
 };
 
 drawPoints(mysteryPoints);
+
+// $('html').mousemove(function (event) {
+//   ctx.lineWidth = 3;
+//   ctx.strokeStyle = 'black';
+//   ctx.beginPath();
+//   ctx.arc(event.pageX, event.pageY, 3, 0, Math.PI * 2, false);
+//   ctx.stroke();
+// });
