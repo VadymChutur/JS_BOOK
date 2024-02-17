@@ -31,6 +31,7 @@ const circle = function (x, y, radius, fillCircle) {
 
 const Ball = function () {
   this.speed = 5;
+  this.scale = 10;
   this.x = width / 2;
   this.y = height / 2;
   this.xSpeed = this.speed;
@@ -51,7 +52,7 @@ Ball.prototype.move = function () {
 };
 
 Ball.prototype.draw = function () {
-  circle(this.x, this.y, 10, true);
+  circle(this.x, this.y, this.scale, true);
 };
 
 Ball.prototype.setDirection = function (direction) {
@@ -95,6 +96,42 @@ Ball.prototype.setSpeed = function (speed) {
   }
 };
 
+Ball.prototype.setManualSpeedIncrase = function (incrase) {
+  if (incrase === 'high') {
+    this.speed += 1;
+  } else if (this.speed > 99) {
+    this.speed -= 1;
+  }
+  console.log(this.speed);
+};
+
+Ball.prototype.setManualSpeedDecrase = function (decrase) {
+  if (decrase === 'low') {
+    this.speed -= 1;
+  } else if (this.speed < 1) {
+    this.speed += 1;
+  }
+  console.log(this.speed);
+};
+
+Ball.prototype.setUpscale = function (upscale) {
+  if (upscale === 'upscale') {
+    this.scale += 1;
+  } else if (this.scale > 50) {
+    this.scale -= 1;
+  }
+  console.log(this.scale);
+};
+
+Ball.prototype.setRescale = function (rescale) {
+  if (rescale === 'rescale') {
+    this.scale -= 1;
+  } else if (this.scale < 1) {
+    this.scale = 10;
+  }
+  console.log(this.scale);
+};
+
 const ball = new Ball();
 
 const keyActions = {
@@ -103,6 +140,10 @@ const keyActions = {
   38: 'up',
   39: 'right',
   40: 'down',
+  90: 'low',
+  88: 'high',
+  67: 'upscale',
+  86: 'rescale',
 };
 
 const speeds = {
@@ -128,6 +169,26 @@ $('body').keydown(function (event) {
 $('body').keydown(function (event) {
   let speed = speeds[event.keyCode];
   ball.setSpeed(speed);
+});
+
+$('body').keydown(function (event) {
+  let speed = keyActions[event.keyCode];
+  ball.setManualSpeedIncrase(speed);
+});
+
+$('body').keydown(function (event) {
+  let speed = keyActions[event.keyCode];
+  ball.setManualSpeedDecrase(speed);
+});
+
+$('body').keydown(function (event) {
+  let scale = keyActions[event.keyCode];
+  ball.setUpscale(scale);
+});
+
+$('body').keydown(function (event) {
+  let scale = keyActions[event.keyCode];
+  ball.setRescale(scale);
 });
 
 setInterval(function () {
