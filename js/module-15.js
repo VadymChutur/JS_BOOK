@@ -30,6 +30,8 @@ Block.prototype.drawSquare = function (color) {
   let y = this.row * blockSize;
   ctx.fillStyle = color;
   ctx.fillRect(x, y, blockSize, blockSize);
+  ctx.strokeStyle = 'black';
+  ctx.strokeRect(x, y, blockSize, blockSize);
 };
 
 Block.prototype.drawCircle = function (color) {
@@ -52,7 +54,13 @@ const Snake = function () {
 
 Snake.prototype.draw = function () {
   for (let i = 0; i < this.segments.length; i += 1) {
-    this.segments[i].drawSquare('Blue');
+    if (i === 0) {
+      this.segments[i].drawSquare('Green');
+    } else if (i % 2 === 0) {
+      this.segments[i].drawSquare('Blue');
+    } else {
+      this.segments[i].drawSquare('yellow');
+    }
   }
 };
 
@@ -81,7 +89,8 @@ Snake.prototype.move = function () {
 
   if (newHead.equal(apple.position)) {
     score += 1;
-    apple.move();
+    animationTime -= 1;
+    apple.move(this.segments);
   } else {
     this.segments.pop();
   }
@@ -129,10 +138,17 @@ Apple.prototype.draw = function () {
   this.position.drawCircle('limegreen');
 };
 
-Apple.prototype.move = function () {
+Apple.prototype.move = function (occupiedBloks) {
   const randomCol = Math.floor(Math.random() * (widthInBlocks - 2)) + 1;
   const randomRow = Math.floor(Math.random() * (heightInBloks - 2)) + 1;
   this.position = new Block(randomCol, randomRow);
+
+  for (let i = 0; i < occupiedBloks.length; i += 1) {
+    if (this.position.equal(occupiedBloks[i])) {
+      this.move(occupiedBloks);
+      return;
+    }
+  }
 };
 
 const drawBorder = function () {
@@ -156,26 +172,47 @@ const drawScore = function () {
 // };
 
 const gameOver = function () {
-  clearInterval(intervalId);
+  // clearInterval(intervalId);
   ctx.font = '60px Courier';
   ctx.fillStyle = 'Red';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('Game Over', width / 2, height / 2);
+  ctx.font = '30px Courier';
+  ctx.fillStyle = 'black';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(`Your score :${score}`, width / 2, height / 1.5);
+  drawScore();
+  drawBorder();
+  window.clearTimeout(timeoutId);
 };
 
 const snake = new Snake();
 const apple = new Apple();
 
-const intervalId = setInterval(function () {
+// const intervalId = setInterval(function () {
+//   ctx.clearRect(0, 0, width, height);
+//   drawScore();
+//   // updateScore();
+//   snake.move();
+//   snake.draw();
+//   apple.draw();
+//   drawBorder();
+// }, 100);
+
+let animationTime = 100;
+const gameLoop = function () {
   ctx.clearRect(0, 0, width, height);
   drawScore();
-  // updateScore();
   snake.move();
   snake.draw();
   apple.draw();
   drawBorder();
-}, 100);
+  const timeoutId = setTimeout(gameLoop, animationTime);
+};
+
+gameLoop();
 
 const directions = {
   37: 'left',
